@@ -1,0 +1,151 @@
+/*
+ * Podplane <https://podplane.dev>
+ * Copyright 2026 Nadrama Pty Ltd
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+:root {
+  color-scheme: light;
+  --blue: #1d43fb;
+  --ink: #050505;
+  --muted: #263044;
+  --paper: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  background: var(--blue);
+}
+
+.page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 2rem;
+}
+
+.wrap {
+  width: min(75vw, 56rem);
+}
+
+.bubble {
+  position: relative;
+  margin: 0 1rem 1.5rem;
+  padding: 1.5rem;
+  background: var(--paper);
+  border-radius: 8px;
+  box-shadow: 0 18px 48px rgba(4, 13, 58, 0.18);
+}
+
+.bubble::after {
+  position: absolute;
+  bottom: -10px;
+  left: 3rem;
+  width: 0;
+  height: 0;
+  border-top: 10px solid var(--paper);
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  content: "";
+}
+
+h1 {
+  display: flex;
+  margin: 0.5rem 0 1.5rem;
+  padding: 1rem;
+  color: #ffffff;
+  background: #050505;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+h1 span {
+  display: none;
+  width: 0.08em;
+  margin-left: 0.08em;
+  background: #9ca3af;
+  animation: blink 1.2s steps(1, end) infinite;
+}
+
+p {
+  margin: 0;
+  padding: 0 1rem 1rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--blue);
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.16em;
+}
+
+a:hover {
+  color: #0f2ec2;
+}
+
+.brand {
+  display: block;
+  padding: 1rem 3.5rem 1.5rem 3rem;
+}
+
+.brand img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.more {
+  text-align: center;
+}
+
+.more a {
+  text-decoration: none;
+}
+
+.more a:hover {
+  text-decoration: underline;
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (min-width: 640px) {
+  .wrap {
+    width: min(58vw, 56rem);
+  }
+
+  h1 span {
+    display: inline-block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrap {
+    width: min(42vw, 56rem);
+  }
+}
