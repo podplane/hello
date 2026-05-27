@@ -8,6 +8,16 @@ ghcr.io/podplane/hello:latest
 
 which is used as an example image for the `web` app [template](https://github.com/podplane/templates).
 
+## Configuration
+
+Set `HELLO_MESSAGE` env var to change the message shown on the page:
+
+```
+HELLO_MESSAGE="Hello from my app!" make run
+```
+
+If `HELLO_MESSAGE` is not set, the page shows `Hello, World!` by default.
+
 ## Learn More
 
 Read more about how templates work in the Podplane [templates documentation](https://podplane.dev/docs/templates).
