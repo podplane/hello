@@ -18,6 +18,8 @@ HELLO_MESSAGE="Hello from my app!" make run
 
 If `HELLO_MESSAGE` is not set, the page shows `Hello, World!` by default.
 
+The image listens on port 80 by default. `make run` uses `PORT=8080` for local development; set `PORT` to choose a different local port.
+
 ## Learn More
 
 Read more about how templates work in the Podplane [templates documentation](https://podplane.dev/docs/templates).

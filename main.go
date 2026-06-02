@@ -17,7 +17,7 @@ import (
 var content embed.FS
 
 func main() {
-	addr := ":" + getEnv("PORT", "8080")
+	addr := ":" + getEnv("PORT", "80")
 	message := getEnv("HELLO_MESSAGE", "Hello, World!")
 	indexHTML, err := renderIndex(message)
 	if err != nil {
