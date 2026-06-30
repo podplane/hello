@@ -16,6 +16,8 @@ Set `HELLO_MESSAGE` env var to change the message shown on the page:
 HELLO_MESSAGE="Hello from my app!" make run
 ```
 
+If `HELLO_MESSAGE` starts with `/`, it is treated as an absolute file path. The page shows the file contents, or the read error if the file cannot be opened or read. File messages must be UTF-8 text, must not contain binary control bytes, and are limited to 200 KiB. Messages are HTML-escaped before rendering.
+
 If `HELLO_MESSAGE` is not set, the page shows `Hello, World!` by default.
 
 The image listens on port 80 by default. `make run` uses `PORT=8080` for local development; set `PORT` to choose a different local port.

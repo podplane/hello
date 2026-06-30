@@ -8,17 +8,22 @@ import (
 	"bytes"
 	"embed"
 	"html/template"
+	"io"
 	"log"
 	"net/http"
 	"os"
+	"strings"
+	"unicode/utf8"
 )
+
+const maxMessageFileSize = 200 * 1024
 
 //go:embed index.html index.css podplane-logo.svg favicon.svg favicon.ico
 var content embed.FS
 
 func main() {
 	addr := ":" + getEnv("PORT", "80")
-	message := getEnv("HELLO_MESSAGE", "Hello, World!")
+	message := helloMessage()
 	indexHTML, err := renderIndex(message)
 	if err != nil {
 		log.Fatal(err)
@@ -65,4 +70,34 @@ func getEnv(key, fallback string) string {
 		return fallback
 	}
 	return value
+}
+
+// helloMessage returns HELLO_MESSAGE, or the default message when it is unset.
+// When HELLO_MESSAGE starts with '/', it is treated as a file path and the
+// rendered message is either the file contents or a safe-to-display error.
+func helloMessage() string {
+	message := getEnv("HELLO_MESSAGE", "Hello, World!")
+	if !strings.HasPrefix(message, "/") {
+		return message
+	}
+
+	file, err := os.Open(message)
+	if err != nil {
+		return err.Error()
+	}
+	defer file.Close()
+
+	contents, err := io.ReadAll(io.LimitReader(file, maxMessageFileSize+1))
+	if err != nil {
+		return "read " + message + ": " + err.Error()
+	}
+	if len(contents) > maxMessageFileSize {
+		return "read " + message + ": file is larger than 200 KiB"
+	}
+	if !utf8.Valid(contents) || strings.ContainsFunc(string(contents), func(r rune) bool {
+		return r < ' ' && r != '\t' && r != '\n' && r != '\r'
+	}) {
+		return "read " + message + ": file contains binary or non-UTF-8 data"
+	}
+	return string(contents)
 }
