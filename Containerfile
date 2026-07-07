@@ -13,5 +13,5 @@ RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /hello .
 FROM scratch
 COPY --from=build /hello /hello
 USER 65532:65532
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ["/hello"]

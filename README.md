@@ -20,7 +20,7 @@ If `HELLO_MESSAGE` starts with `/`, it is treated as an absolute file path. The 
 
 If `HELLO_MESSAGE` is not set, the page shows `Hello, World!` by default.
 
-The image listens on port 80 by default. `make run` uses `PORT=8080` for local development; set `PORT` to choose a different local port.
+The image listens on port 8080 by default; set `PORT` to choose a different port.
 
 ## Learn More
 

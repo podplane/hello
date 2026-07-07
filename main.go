@@ -22,7 +22,7 @@ const maxMessageFileSize = 200 * 1024
 var content embed.FS
 
 func main() {
-	addr := ":" + getEnv("PORT", "80")
+	addr := ":" + getEnv("PORT", "8080")
 	message := helloMessage()
 	indexHTML, err := renderIndex(message)
 	if err != nil {
